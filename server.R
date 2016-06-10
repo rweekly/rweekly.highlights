@@ -19,7 +19,7 @@ shinyServer(function(input, output, session) {
   
   output$highlights_checklist_UI <- renderUI({
     checkboxGroupInput("highlights_checklist", 
-                       label = h3("Check 10 most important topics for vote"), 
+                       label = h3("Check 10 most important topics to vote"), 
                        choices = highlights,
                        selected = NULL,
                        width = "800px")
