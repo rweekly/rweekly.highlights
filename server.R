@@ -36,6 +36,7 @@ shinyServer(function(input, output, session) {
     }
     HTML(
       paste0(
+        '<p>', length(input$highlights_checklist), ' selected.</p>',
         '<code>/poll "Which of the following items in ', issue, 
         ' should be highlighted?" "', 
         paste0(input$highlights_checklist, collapse = '" "'), '"</code>'
