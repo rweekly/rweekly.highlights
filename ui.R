@@ -15,7 +15,7 @@ ribbon_corner <- function(link = "#", fill_color = "#151513", octocat_color = "#
   )
   
   tags$a(
-    href = link, class="github-corner",
+    href = link, class = "github-corner",
     HTML('<svg width="80" height="80" viewBox="0 0 250 250" ',
          'style="z-index: 2000;fill:', fill_color, '; color:', octocat_color,
          '; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 ',
@@ -26,8 +26,8 @@ shinyUI(
   navbarPage(
     "Rweekly Highlights",
     tags$head(
-      tags$link(rel = "stylesheet", href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/simplex/bootstrap.min.css"),
-      tags$link(rel = "stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css")
+      tags$link(rel = "stylesheet", href = "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/simplex/bootstrap.min.css"),
+      tags$link(rel = "stylesheet", href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css")
     ),
     position = "static-top",
     fluid = F,
@@ -42,7 +42,7 @@ shinyUI(
         column(6, 
           h4("Please copy and paste the following message to ",
                 "our Slack channel"),
-          p("(Please limit this list within 10 items as `Simple Poll` ",
+          p("(Please limit this list to 10 items as `Simple Poll` ",
             "does not take more than 10 items.)"),
           htmlOutput("vote")
           )
