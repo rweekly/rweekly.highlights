@@ -2,19 +2,16 @@ library(shiny)
 
 shinyServer(function(input, output, session) {
   
-  library(httr)
-  library(stringr)
-  
   # Fetch draft
-  draft <- GET("https://raw.githubusercontent.com/rweekly/rweekly.org/gh-pages/draft.md") %>%
-    content("text")
+  draft <- httr::GET("https://raw.githubusercontent.com/rweekly/rweekly.org/gh-pages/draft.md") %>%
+    httr::content("text")
   
   # Obtain Issue number
-  issue <- (draft %>% str_match("title:\\s(.+)\\n"))[,2]
+  issue <- (draft %>% stringr::str_match("title:\\s(.+)\\n"))[,2]
   
   # Obtain Items list
   highlights <- draft %>% 
-    str_match_all("\\+\\s\\[([^\\]]+)\\]\\(([^\\)]+)\\)")
+    stringr::str_match_all("\\+\\s\\[([^\\]]+)\\]\\(([^\\)]+)\\)")
   
   highlightList <- paste0(highlights[[1]][,2], "\n", highlights[[1]][,3])
   
