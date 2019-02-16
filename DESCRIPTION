@@ -20,3 +20,6 @@ Suggests:
     shiny,
     httr,
     stringr
+RoxygenNote: 6.1.1
+Imports: 
+    magrittr

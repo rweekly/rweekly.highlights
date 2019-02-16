@@ -10,7 +10,7 @@
 #' run_app()
 #' }
 #' @export
-run__app <- function() {
+run_app <- function() {
   if (!requireNamespace("shiny", quietly = TRUE)) {
     message("run_shiny_app needs the shiny package, \n
               Install it via install.packages('shiny')")
@@ -30,7 +30,7 @@ run__app <- function() {
   }
   # nocov start
   app_dir <- system.file("shiny-examples",
-                         "myapp", package = "rtimicropem")
+                         "myapp", package = "rweekly.highlights")
   if (app_dir == "") {
     stop("Could not find example directory. Try re-installing `micropem`.",
          call. = FALSE)
