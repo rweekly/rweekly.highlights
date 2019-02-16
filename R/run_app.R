@@ -12,19 +12,19 @@
 #' @export
 run_app <- function() {
   if (!requireNamespace("shiny", quietly = TRUE)) {
-    message("run_shiny_app needs the shiny package, \n
+    message("run_app needs the shiny package, \n
               Install it via install.packages('shiny')")
     return(NULL)
   }
   
   if (!requireNamespace("httr", quietly = TRUE)) {
-    message("run_shiny_app needs the httr package, \n
+    message("run_app needs the httr package, \n
               Install it via install.packages('httr')")
     return(NULL)
   }
   
   if (!requireNamespace("stringr", quietly = TRUE)) {
-    message("run_shiny_app needs the stringr package, \n
+    message("run_app needs the stringr package, \n
               Install it via install.packages('stringr')")
     return(NULL)
   }
