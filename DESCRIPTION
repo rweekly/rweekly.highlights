@@ -23,10 +23,11 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/rweekly/rweekly-highlights
 BugReports: https://github.com/rweekly/rweekly-highlights/issues
-Suggests: 
-    shiny,
-    httr,
-    stringr
 RoxygenNote: 6.1.1
 Imports: 
-    magrittr
+    magrittr,
+    shinythemes,
+    stringr,
+    httr,
+    clipr,
+    shiny

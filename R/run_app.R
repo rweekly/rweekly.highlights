@@ -4,6 +4,8 @@
 #'  R Weekly draft, to be voted upon by R Weekly editors.
 #'   The app outputs the text to be pasted in the '#highlights' 
 #'   Slack channel.
+#'   
+#' @import shiny
 #'
 #' @examples
 #' \dontrun{
@@ -28,14 +30,118 @@ run_app <- function() {
               Install it via install.packages('stringr')")
     return(NULL)
   }
-  # nocov start
-  app_dir <- system.file("shiny-examples",
-                         "myapp", package = "rweekly.highlights")
-  if (app_dir == "") {
-    stop("Could not find example directory. Try re-installing `micropem`.",
-         call. = FALSE)
+
+  shiny::shinyApp(ui = highlight_ui, server = highlight_server)
+}
+
+highlight_ui <- navbarPage(
+  "Rweekly Highlights",
+  theme = shinythemes::shinytheme("simplex"),
+  position = "static-top",
+  fluid = F,
+  windowTitle = "Discover RStudio Addins",
+  
+  tabPanel(
+    "Topics", class = "active", icon = icon("rocket"),
+    fluidRow(
+      column(6, wellPanel(uiOutput("highlights_checklist_UI"))),
+      column(6, 
+             h4("Please copy and paste the following message to ",
+                "our Slack channel"),
+             p("(Please limit this list to 10 items as `Simple Poll` ",
+               "does not take more than 10 items.)"),
+             actionButton("copy", "Copy to Clipboard", icon = icon("clipboard")),
+             htmlOutput("vote")
+      )
+    )
+  )
+)
+
+
+highlight_server <- function(input, output, session) {
+  
+  # Fetch draft
+  draft <- httr::GET("https://raw.githubusercontent.com/rweekly/rweekly.org/gh-pages/draft.md") %>%
+    httr::content("text")
+  
+  # Obtain Issue number
+  issue <- (draft %>% stringr::str_match("title:\\s(.+)\\n"))[,2]
+  
+  # Obtain Items list
+  highlights <- draft %>% 
+    stringr::str_match_all("\\+\\s\\[([^\\]]+)\\]\\(([^\\)]+)\\)")
+  
+  highlightList <- gsub('"', '', paste0(highlights[[1]][,2], "\n", highlights[[1]][,3]))
+  
+  observeEvent(input$highlights_checklist, {
+    
+    if (length(input$highlights_checklist) < 10) {
+      showNotification("More items needed.", 
+                       duration = NULL,
+                       closeButton = FALSE,
+                       id = "status", 
+                       type = "warning")
+    } else if (length(input$highlights_checklist) == 10) {
+      showNotification("Ready!",
+                       duration = NULL,
+                       closeButton = FALSE,
+                       id = "status", 
+                       type = "message")
+    } else {
+      showNotification("Too many items selected.", 
+                       duration = NULL,
+                       closeButton = FALSE,
+                       id = "status", 
+                       type = "error")
+    }
+    
+  })
+  
+  output$highlights_checklist_UI <- renderUI({
+    checkboxGroupInput("highlights_checklist", 
+                       label = h3("Check 10 most important topics to vote"), 
+                       choiceNames = highlights[[1]][,2],
+                       choiceValues = 1:length(highlights[[1]][,2]),
+                       selected = NULL,
+                       width = "800px")
+  })
+  
+  slack_code <- reactive({
+    paste0(
+      '/poll "Which of the following items in ', issue, 
+      ' should be highlighted?" "', 
+      paste0(
+        highlightList[as.numeric(input$highlights_checklist)],
+        collapse = '" "'),
+      '"'
+    )
+  })
+  
+  output$vote <- function(){
+    if (is.null(input$highlights_checklist)) {
+      return(HTML(
+        paste0(
+          '<code>/poll "Which of the following items in ', issue, 
+          ' should be highlighted?" </code>'
+        )
+      ))
+    }
+    HTML(
+      paste0(
+        '<p>', length(input$highlights_checklist), ' selected.</p>',
+        '<code>', slack_code(), '</code>'
+      )
+    )
   }
   
-  shiny::runApp(app_dir, display.mode = "normal")
+  observeEvent(input$copy, {
+    clipr::write_clip(slack_code())
+    updateActionButton(session, "copy", label = "Copied")
+  })
+  
+  observeEvent(input$highlights_checklist, {
+    updateActionButton(session, "copy", label = "Copy to Clipboard")
+  })
+  
+  
 }
-# nocov end

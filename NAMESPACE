@@ -2,4 +2,5 @@
 
 export("%>%")
 export(run_app)
+import(shiny)
 importFrom(magrittr,"%>%")
