@@ -12,7 +12,7 @@ You can install `rweekly.highlights` from GitHub with:
 
 ``` r
 devtools::install_github("rweekly/rweekly.highlights",
-                         dependencies = TRUEs)
+                         dependencies = TRUE)
 ```
 
 ## Poll making
