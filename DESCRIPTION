@@ -30,4 +30,9 @@ Imports:
     stringr,
     httr,
     clipr,
-    shiny
+    shiny,
+    xml2,
+    commonmark,
+    fs,
+    purrr
+    
