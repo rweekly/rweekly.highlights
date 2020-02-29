@@ -30,7 +30,17 @@ run_app <- function() {
               Install it via install.packages('stringr')")
     return(NULL)
   }
-
+  
+  cur_path <- file.path(getwd(), "draft.md")
+  if (file.exists(cur_path)) {
+    dups <- get_dups()
+    if (length(dups)) {
+      warning('find dups')
+      print(dups)
+      invisible(return(NULL))
+    }
+  }
+  
   shiny::shinyApp(ui = highlight_ui, server = highlight_server)
 }
 
@@ -59,10 +69,15 @@ highlight_ui <- navbarPage(
 
 
 highlight_server <- function(input, output, session) {
-  
-  # Fetch draft
-  draft <- httr::GET("https://raw.githubusercontent.com/rweekly/rweekly.org/gh-pages/draft.md") %>%
-    httr::content("text")
+  cur_path <- file.path(getwd(), 'draft.md')
+  if (file.exists(cur_path)) {
+    draft <- paste(readLines(cur_path), sep = '\n', collapse = '\n')
+  } else {
+    warning('using the remote draft, skip checking dup links. Run this function in the folder with the draft to check duplicated items')
+    # Fetch draft
+    draft <- httr::GET("https://raw.githubusercontent.com/rweekly/rweekly.org/gh-pages/draft.md") %>%
+      httr::content("text")
+  }
   
   # Obtain Issue number
   issue <- (draft %>% stringr::str_match("title:\\s(.+)\\n"))[,2]
