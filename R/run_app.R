@@ -150,7 +150,7 @@ highlight_server <- function(input, output, session) {
   }
   
   observeEvent(input$copy, {
-    clipr::write_clip(slack_code())
+    clipr::write_clip(slack_code(), allow_non_interactive = TRUE)
     updateActionButton(session, "copy", label = "Copied")
   })
   
