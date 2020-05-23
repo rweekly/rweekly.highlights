@@ -60,7 +60,8 @@ highlight_ui <- navbarPage(
                 "our Slack channel"),
              p("(Please limit this list to 10 items as `Simple Poll` ",
                "does not take more than 10 items.)"),
-             actionButton("copy", "Copy to Clipboard", icon = icon("clipboard")),
+             # disable for linux server
+             # actionButton("copy", "Copy to Clipboard", icon = icon("clipboard")),
              htmlOutput("vote")
       )
     )
