@@ -1,6 +1,6 @@
 Package: rweekly.highlights
 Title: Creates the Weekly Highlights Poll Slack Text.
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     c(person(given = "Qin Wenfeng",
              role = c("aut", "cre"),
@@ -16,7 +16,12 @@ Authors@R:
              email = "haozhu233@gmail.com"),
       person(given = "Jon",
              family = "Calder",
-             role = "ctb"))
+             role = "ctb"),
+      persion(given = "Eric",
+              family = "Nantz",
+              role = "ctb",
+              email = "theRcast@gmail.com")
+      )
 Description: The app started by `run_app()` lets you pick up up to 10 links from the current R Weekly draft, to be voted upon by R Weekly editors. The app outputs the text to be pasted in the '#highlights' Slack channel.
 License: MIT + file LICENSE
 Encoding: UTF-8
