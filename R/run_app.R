@@ -12,7 +12,7 @@
 #' run_app()
 #' }
 #' @export
-run_app <- function() {
+run_app <- function(check_dups = TRUE) {
   if (!requireNamespace("shiny", quietly = TRUE)) {
     message("run_app needs the shiny package, \n
               Install it via install.packages('shiny')")
@@ -30,9 +30,8 @@ run_app <- function() {
               Install it via install.packages('stringr')")
     return(NULL)
   }
-
   cur_path <- file.path(getwd(), "draft.md")
-  if (file.exists(cur_path)) {
+  if (file.exists(cur_path) & check_dups) {
     dups <- get_dups()
     if (length(dups)) {
       warning('find dups')
