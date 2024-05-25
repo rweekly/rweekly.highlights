@@ -17,7 +17,7 @@ Authors@R:
       person(given = "Jon",
              family = "Calder",
              role = "ctb"),
-      persion(given = "Eric",
+      person(given = "Eric",
               family = "Nantz",
               role = "ctb",
               email = "theRcast@gmail.com")
