@@ -44,7 +44,7 @@ run_app <- function(
     message("Skipping duplicate check and launching app...")
   }
   
-  with_golem_options(
+  golem::with_golem_options(
     app = shinyApp(
       ui = app_ui,
       server = app_server,
