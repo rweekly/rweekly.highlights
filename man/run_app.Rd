@@ -4,7 +4,42 @@
 \alias{run_app}
 \title{Creates the Weekly Highlights Poll Slack Text.}
 \usage{
-run_app()
+run_app(
+  check_dups = FALSE,
+  onStart = NULL,
+  options = list(),
+  enableBookmarking = NULL,
+  uiPattern = "/",
+  ...
+)
+}
+\arguments{
+\item{check_dups}{Logical. If TRUE, checks for duplicate links before launching the app.
+Only works when running from the rweekly.org repository with _posts directory present.
+Defaults to FALSE for development mode.}
+
+\item{onStart}{A function that will be called before the app is actually run.
+This is only needed for \code{shinyAppObj}, since in the \code{shinyAppDir}
+case, a \code{global.R} file can be used for this purpose.}
+
+\item{options}{Named options that should be passed to the \code{runApp} call
+(these can be any of the following: "port", "launch.browser", "host", "quiet",
+"display.mode" and "test.mode"). You can also specify \code{width} and
+\code{height} parameters which provide a hint to the embedding environment
+about the ideal height/width for the app.}
+
+\item{enableBookmarking}{Can be one of \code{"url"}, \code{"server"}, or
+\code{"disable"}. The default value, \code{NULL}, will respect the setting from
+any previous calls to  \code{\link[shiny:enableBookmarking]{enableBookmarking()}}. See \code{\link[shiny:enableBookmarking]{enableBookmarking()}}
+for more information on bookmarking your app.}
+
+\item{uiPattern}{A regular expression that will be applied to each \code{GET}
+request to determine whether the \code{ui} should be used to handle the
+request. Note that the entire request path must match the regular
+expression in order for the match to be considered successful.}
+
+\item{...}{arguments to pass to golem_opts.
+See `?golem::get_golem_options` for more details.}
 }
 \description{
 Creates the Weekly Highlights Poll Slack Text.
@@ -12,7 +47,7 @@ Creates the Weekly Highlights Poll Slack Text.
 \details{
 This app lets you pick up up to 10 links from the current
  R Weekly draft, to be voted upon by R Weekly editors.
-  The app outputs the text to be pasted in the '#highlights' 
+  The app outputs the text to be pasted in the '#highlights'
   Slack channel.
 }
 \examples{

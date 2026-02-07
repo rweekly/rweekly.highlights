@@ -1,5 +1,5 @@
 Package: rweekly.highlights
-Title: Creates the Weekly Highlights Poll Slack Text.
+Title: Creates the Weekly Highlights Poll Slack Text
 Version: 0.1.0.0000
 Authors@R: 
     c(person(given = "Qin Wenfeng",
@@ -28,12 +28,11 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/rweekly/rweekly-highlights
 BugReports: https://github.com/rweekly/rweekly-highlights/issues
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.3
 Imports: 
     magrittr,
     stringr,
     httr,
-    clipr,
     shiny,
     xml2,
     commonmark,
