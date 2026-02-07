@@ -1,6 +1,6 @@
 Package: rweekly.highlights
-Title: Creates the Weekly Highlights Poll Slack Text.
-Version: 0.0.0.9001
+Title: Creates the Weekly Highlights Poll Slack Text
+Version: 0.1.0.0000
 Authors@R: 
     c(person(given = "Qin Wenfeng",
              role = c("aut", "cre"),
@@ -22,22 +22,24 @@ Authors@R:
               role = "ctb",
               email = "theRcast@gmail.com")
       )
-Description: The app started by `run_app()` lets you pick up up to 10 links from the current R Weekly draft, to be voted upon by R Weekly editors. The app outputs the text to be pasted in the '#highlights' Slack channel.
+Description: The app started by `run_app()` lets you pick up up to 10 links from the current R Weekly draft, to be voted upon by R Weekly editors. The app outputs the text to be pasted in the '#highlights' Slack channel. This version uses the golem framework and bslib for modern UI.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/rweekly/rweekly-highlights
 BugReports: https://github.com/rweekly/rweekly-highlights/issues
-RoxygenNote: 6.1.1
+RoxygenNote: 7.3.3
 Imports: 
     magrittr,
-    shinythemes,
     stringr,
     httr,
-    clipr,
     shiny,
     xml2,
     commonmark,
     fs,
-    purrr
-    
+    purrr,
+    golem,
+    bslib,
+    config
+Suggests:
+    shinythemes

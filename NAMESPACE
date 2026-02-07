@@ -2,5 +2,12 @@
 
 export("%>%")
 export(run_app)
+import(bslib)
 import(shiny)
+importFrom(golem,activate_js)
+importFrom(golem,add_resource_path)
+importFrom(golem,bundle_resources)
+importFrom(golem,favicon)
 importFrom(magrittr,"%>%")
+importFrom(shiny,NS)
+importFrom(shiny,tagList)

@@ -5,3 +5,5 @@
 ^result$
 ^build.R$
 ^\.Rprofile$
+^docs$
+^draft\.md$
