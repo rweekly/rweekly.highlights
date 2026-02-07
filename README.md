@@ -50,15 +50,22 @@ The draft is fetched from:
 
 ### Duplicate Checking
 
-If you're working with a local draft, the app will check for duplicate links:
+When running from the rweekly.org repository (with `_posts` directory present), the app can check for duplicate links across recent issues:
 
 ```r
-# Run without duplicate checking
-run_app(check_dups = FALSE)
-
-# Run with duplicate checking (default)
+# Run with duplicate checking (only works in rweekly.org repository)
 run_app(check_dups = TRUE)
+
+# Run without duplicate checking (default for development)
+run_app(check_dups = FALSE)
 ```
+
+**Note**: Duplicate checking requires:
+- A local `draft.md` file in your working directory
+- The `_posts` directory from the rweekly.org repository
+- Running the app from the rweekly.org repository root
+
+In development mode (package directory), duplicate checking is automatically skipped even if `check_dups = TRUE`.
 
 ### Development Environment
 
